@@ -27,7 +27,6 @@ function ProfileScreen() {
     // const { loading, error, success } = userUpdate;
 
     useEffect(() => {
-        console.log("==========");
         if (!loggedInUser) {
 
         } else {

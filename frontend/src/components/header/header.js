@@ -15,7 +15,7 @@ const Header = (props) => {
     };
 
     return <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-        <Container >
+        <Container>
             <Navbar.Brand>
                 <Link to={'/notes'}>Note Zipper</Link>
             </Navbar.Brand>

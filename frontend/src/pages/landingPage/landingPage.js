@@ -12,7 +12,7 @@ const LandingPage = () => {
 
     useEffect(() => {
         const token = document.cookie.split('=').at(1);
-        if (loggedInUser) { //  if (token) {
+        if (loggedInUser) {
             navigate("/notes");
         }
     }, [navigate]);
