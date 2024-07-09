@@ -1,10 +1,11 @@
 import React from "react"
-import { useLocation, Navigate, Outlet } from "react-router-dom"
+import { useLocation, Navigate, Outlet, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 const RequireAuth = props => {
-    const { token } = useSelector(state => state?.userLogin?.loggedInUser);
+    const token = useSelector(state => state?.userLogin?.loggedInUser);
     const location = useLocation();
+    const navigate = useNavigate();
     if (!token) {
         return (
             <Navigate

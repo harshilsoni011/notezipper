@@ -5,8 +5,6 @@ import { updateProfile } from "../../actions/userActions";
 import Loading from "../../components/loadder/loader";
 import ErrorMessage from "../../components/error/error";
 import Common from "../../components/common";
-import { Link } from "react-router-dom";
-import Dropzone from "react-dropzone";
 
 
 function ProfileScreen() {

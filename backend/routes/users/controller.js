@@ -74,7 +74,6 @@ const controllers = {
         res.cookie('jwt', user.token, {
             httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000,
         });
-        console.log("🚀 ~ file: controller.js:77 ~ login: ~ user:", user)
         return res.sendSuccess(user);
     },
 

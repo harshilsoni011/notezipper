@@ -1,10 +1,10 @@
-import LandingPage from "../src/pages/landingPage/landingPage";
-import Login from "../src/pages/login/login";
-import Register from "../src/pages/register/register";
-import CreateNote from "../src/pages/MyNotes/createNotes";
-import Logout from "../src/pages/logout/logout";
-import MyNotes from "../src/pages/MyNotes/MyNotes";
-import ProfileScreen from '../src/pages/profile/profile';
+import LandingPage from "../../src/pages/landingPage/landingPage";
+import Login from "../../src/pages/login/login";
+import Register from "../../src/pages/register/register";
+import CreateNote from "../../src/pages/MyNotes/createNotes";
+import Logout from "../../src/pages/logout/logout";
+import MyNotes from "../../src/pages/MyNotes/MyNotes";
+import ProfileScreen from '../../src/pages/profile/profile';
 
 const protectedRoutes = [
     {

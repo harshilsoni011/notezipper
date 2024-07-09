@@ -3,9 +3,9 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const RedirectToDashboard = () => {
-    const { token } = useSelector(state => state?.userLogin?.loggedInUser);
+    const token = useSelector(state => state?.userLogin?.loggedInUser);
     const location = useLocation()
-    console.log("🚀 ~ segsgdiosbgibi ~ token:", location)
+    console.log("🚀 ~ RedirectToDashboard ~ location:", location)
     let redirectRoute = "/notes"
     if (location?.state?.from) {
         if (location?.state?.from?.pathname) {
@@ -15,7 +15,7 @@ const RedirectToDashboard = () => {
             }
         }
     }
-    return token ? (
+    return !!token ? (
         <Navigate to={redirectRoute} state={{ from: location }} replace />
     ) : (
         <Outlet />

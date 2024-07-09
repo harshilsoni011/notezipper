@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { LuClipboardEdit } from "react-icons/lu";
+import { FiTrash2 } from "react-icons/fi";
 
 const MyNotes = (props) => {
+console.log("🚀 ~ MyNotes ~ props:", props)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -15,13 +18,19 @@ const MyNotes = (props) => {
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(false);
     const [filteredNotes, setFilteredNotes] = useState([])
+    const [hoveredNote, setHoveredNote] = useState(null);
+
+    const handleMouseEnter = (noteId) => {
+        setHoveredNote(noteId);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredNote(null);
+    };
 
     useEffect(() => {
-        if (!loggedInUser) {
-            navigate("/login");
-        }
         fetchNotes()
-    }, [navigate, loggedInUser]);
+    }, [loggedInUser]);
 
     const deleteHandler = (id) => {
         axios.put(`/delete-note/${id}`).then((res) => {
@@ -94,12 +103,6 @@ const MyNotes = (props) => {
         })
     }
 
-    // const filteredNotes = notes.filter((note) => {
-    //     return note?.title?.toLowerCase().includes(props?.searchValue?.toLowerCase())
-    //         || note?.content?.toLowerCase().includes(props?.searchValue?.toLowerCase())
-    //         || note?.category?.toLowerCase().includes(props?.searchValue?.toLowerCase())
-    // });
-
     return <Common title={`Hello ${loggedInUser?.name}`}>
         {error && (
             <div className="alert alert-danger mt-3">
@@ -114,25 +117,23 @@ const MyNotes = (props) => {
                     type="text"
                     placeholder='Search..'
                     className='mr-sm-2'
-                    // onChange={(e) => {
-                    //     e.preventDefault()
-                    //     setSearch(e.target.value)
-                    // }}
                     onChange={handleInputChange}
                 />
             </Form>
             <Link to="/create-note">
-                <Button style={{ marginLeft: 10, marginBottom: 6, justifyContent: "end" }} size="md">
+                <Button style={{ marginLeft: 10, marginBottom: 6 }} size="md">
                     Create new Note
                 </Button>
             </Link>
         </Nav>
 
-
         {filteredNotes.length > 0 ? filteredNotes.map(note => (
             <Accordion key={note._id}>
                 <Card key={note._id} style={{ margin: 10 }}>
-                    <Card.Header style={{ display: "flex" }}>
+                    <Card.Header style={{ display: "flex" }}
+                        onMouseEnter={() => handleMouseEnter(note._id)}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <span
                             style={{
                                 color: "black",
@@ -147,12 +148,12 @@ const MyNotes = (props) => {
                             </Accordion.Button>
                         </span>
                         <div>
-                            <Button onClick={() => editHandler(note)}>
-                                Edit
-                            </Button>
-                            <Button variant="danger" className="mx-2" onClick={() => showConfirmDelete(note._id)}>
-                                Delete
-                            </Button>
+                            {hoveredNote === note._id && (
+                                <div>
+                                    <LuClipboardEdit style={{ cursor: "pointer", color: "#0052aa" }} size={17} onClick={() => editHandler(note)} />
+                                    <FiTrash2 style={{ cursor: "pointer", marginLeft: "5px", color: "rgb(208 44 44)" }} size={17} onClick={() => showConfirmDelete(note)} />
+                                </div>
+                            )}
                         </div>
                     </Card.Header>
                     <Accordion.Body eventKey="0">

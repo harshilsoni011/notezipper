@@ -17,16 +17,17 @@ function CreateNote() {
     const [title, setTitle] = useState(selectedNote?.title || "");
     const [content, setContent] = useState(selectedNote?.content || "");
     const [category, setCategory] = useState(selectedNote?.category || "");
+    const [createdOn, setCreatedOn] = useState(selectedNote?.createdOn || "");
     const navigate = useNavigate();
 
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, error, loggedInUser } = userLogin
 
-    useEffect(() => {
-        if (!loggedInUser) {
-            navigate("/login");
-        }
-    }, [navigate, loggedInUser]);
+    // useEffect(() => {
+    //     if (!loggedInUser) {
+    //         navigate("/login");
+    //     }
+    // }, [navigate, loggedInUser]);
 
     const resetHandler = () => {
         setTitle("");
@@ -108,7 +109,9 @@ function CreateNote() {
                 </Card.Body>
 
                 <Card.Footer className="text-muted">
-                    Creating on - {new Date().toLocaleDateString()}
+                    {
+                        id ? `Created On - ${new Date(createdOn).toLocaleDateString()}` : `Creating On - ${new Date().toLocaleDateString()}`
+                    }
                 </Card.Footer>
             </Card>
         </Common>

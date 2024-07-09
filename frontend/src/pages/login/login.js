@@ -10,17 +10,10 @@ import { login } from '../../actions/userActions';
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate();
 
     const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, error, loggedInUser } = userLogin
-
-    useEffect(() => {
-        if (loggedInUser) {
-            navigate("/notes");
-        }
-    }, [navigate, loggedInUser]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
