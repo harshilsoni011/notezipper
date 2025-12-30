@@ -27,7 +27,6 @@ function ProfileScreen() {
     // const { loading, error, success } = userUpdate;
 
     useEffect(() => {
-        console.log("==========");
         if (!loggedInUser) {
 
         } else {
@@ -39,7 +38,6 @@ function ProfileScreen() {
 
     const postDetails = (pics) => {
         setPicMessage(null);
-
     };
 
     const submitHandler = (e) => {
@@ -85,7 +83,7 @@ function ProfileScreen() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="password">
+                            {/* <Form.Group controlId="password">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control
                                     type="password"
@@ -102,7 +100,7 @@ function ProfileScreen() {
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 ></Form.Control>
-                            </Form.Group>{" "}
+                            </Form.Group>{" "} */}
                             {picMessage && (
                                 <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
                             )}

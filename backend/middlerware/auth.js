@@ -5,7 +5,7 @@ const tokenKey = process.env.jwtToken;
 const verifyToken = (req, res, next) => {
     try {
         const token = req.headers["authorization"]?.split(" ").at(1);
-
+        
         if (!token) {
             return res.sendLogin();
         }
